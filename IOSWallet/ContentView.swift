@@ -14,45 +14,29 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
+            
+            VStack{
+                Text("Simply \nBusiness \nBanking App")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .foregroundColor(Color.white)
+                
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Text("Create Account")
+                    Image(systemName: "arrow.right")
+                }).foregroundColor(.white)
+                
+                
+                
+            }.frame(minWidth: 0, maxWidth: .infinity,
+                    minHeight: 0,maxHeight: .infinity)
+            .background(Color.purple)
+        }
+        
+    detail: {
             Text("Select an item")
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
 }
 
 #Preview {
